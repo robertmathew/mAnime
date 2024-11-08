@@ -1,0 +1,9 @@
+query AnimeDetails(
+    $mediaId: Int,
+) {
+    Media(
+        id: $mediaId,
+    ) {
+        ...AnimeDetail
+    }
+}

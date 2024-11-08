@@ -1,0 +1,12 @@
+fragment AnimeList on Media {
+    id
+    type
+    title {
+        romaji
+        english
+    }
+    coverImage {
+        extraLarge
+        large
+    }
+}
