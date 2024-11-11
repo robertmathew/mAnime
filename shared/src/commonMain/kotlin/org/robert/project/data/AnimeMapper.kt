@@ -5,6 +5,8 @@ import org.robert.project.AnimeDetailsQuery
 import org.robert.project.PopularAnimeQuery
 import org.robert.project.model.AnimeDetailResponse
 import org.robert.project.model.AnimeListResponse
+import org.robert.project.model.Character
+import org.robert.project.model.VoiceActor
 
 fun PopularAnimeQuery.Medium.toAnimeListResponse(): AnimeListResponse {
     return AnimeListResponse(
@@ -16,10 +18,22 @@ fun PopularAnimeQuery.Medium.toAnimeListResponse(): AnimeListResponse {
 
 fun AnimeDetailsQuery.Media.toAnimeDetailResponse(): AnimeDetailResponse {
     return AnimeDetailResponse(
-        id = animeDetail.id,
-        title = animeDetail.title?.english ?: animeDetail.title?.romaji ?: "",
-        coverImage = animeDetail.coverImage?.extraLarge ?: animeDetail.coverImage?.large ?: "",
-        description = animeDetail.description,
-        genres = (animeDetail.genres ?: emptyList<String>()) as List<String>
+        id = id,
+        title = title?.english ?: title?.romaji ?: "",
+        coverImage = coverImage?.extraLarge ?: coverImage?.large ?: "",
+        description = description,
+        genres = (genres ?: emptyList<String>()) as List<String>,
+        bannerImage = bannerImage ?: "",
+        character = characters?.edges?.map {
+            Character(
+                name = it?.node?.name?.full ?: "",
+                image = it?.node?.image?.large ?: "",
+                voiceActor = VoiceActor(
+                    name = it?.voiceActors?.get(0)?.name?.full ?: "",
+                    image = it?.voiceActors?.get(0)?.image?.large ?: "",
+                    language = it?.voiceActors?.get(0)?.languageV2 ?: ""
+                ),
+            )
+        }
     )
 }

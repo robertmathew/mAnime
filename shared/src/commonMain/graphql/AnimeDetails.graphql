@@ -1,9 +1,56 @@
 query AnimeDetails(
-    $mediaId: Int,
+    $mediaId: Int, $perPage: Int, $language: StaffLanguage
 ) {
     Media(
         id: $mediaId,
     ) {
-        ...AnimeDetail
+        id
+        type
+        title {
+            romaji
+            english
+        }
+        coverImage {
+            extraLarge
+            large
+        }
+        description
+        genres
+        episodes
+        bannerImage
+        trailer {
+            id
+            site
+            thumbnail
+        }
+        coverImage {
+            large
+            extraLarge
+            color
+        }
+        characters(perPage: $perPage) {
+            edges {
+                id
+                node {
+                    id
+                    image {
+                        large
+                    }
+                    name {
+                        full
+                    }
+                }
+                voiceActors(language: $language) {
+                    image {
+                        large
+                    }
+                    name {
+                        full
+                    }
+                    languageV2
+                }
+                role
+            }
+        }
     }
 }
