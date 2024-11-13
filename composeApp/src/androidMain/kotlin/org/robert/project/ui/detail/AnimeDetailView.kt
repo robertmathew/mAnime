@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.robert.project.R
+import org.robert.project.model.Character
 
 @Composable
 @Preview
@@ -77,6 +78,8 @@ fun AnimeDetailView(
                                 style = MaterialTheme.typography.h5,
                                 text = animeDetails.title
                             )
+
+                            // Description
                             animeDetails.description?.let {
                                 Column(modifier = Modifier.padding(top = 16.dp)) {
                                     Text(
@@ -92,6 +95,8 @@ fun AnimeDetailView(
                                     )
                                 }
                             }
+
+                            // Characters
                             animeDetails.character?.let {
                                 Column(
                                     modifier = Modifier.padding(top = 16.dp)
@@ -104,48 +109,7 @@ fun AnimeDetailView(
                                     )
 
                                     it.forEach { character ->
-                                        Card(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(vertical = 8.dp)
-                                                .height(62.dp),
-                                            shape = RoundedCornerShape(4.dp)
-                                        ) {
-                                            Row(horizontalArrangement = Arrangement.SpaceBetween) {
-                                                Row {
-                                                    AsyncImage(
-                                                        model = character.image,
-                                                        contentDescription = null
-                                                    )
-                                                    Text(
-                                                        modifier = Modifier.padding(
-                                                            start = 8.dp, top = 8.dp
-                                                        ),
-                                                        text = character.name,
-                                                        style = MaterialTheme.typography.body2,
-                                                    )
-                                                }
-
-                                                Row {
-                                                    Column(horizontalAlignment = Alignment.End) {
-                                                        Text(
-                                                            modifier = Modifier.padding(top = 8.dp),
-                                                            text = character.voiceActor.name,
-                                                            style = MaterialTheme.typography.body2,
-                                                        )
-                                                        Text(
-                                                            text = character.voiceActor.language,
-                                                            style = MaterialTheme.typography.body2
-                                                        )
-                                                    }
-                                                    AsyncImage(
-                                                        modifier = Modifier.padding(start = 8.dp),
-                                                        model = character.voiceActor.image,
-                                                        contentDescription = null
-                                                    )
-                                                }
-                                            }
-                                        }
+                                        CharacterListView(character = character)
                                     }
                                 }
                             }
@@ -158,4 +122,48 @@ fun AnimeDetailView(
         )
     }
 
+}
+
+@Composable
+fun CharacterListView(character: Character) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .height(62.dp),
+        shape = RoundedCornerShape(4.dp)
+    ) {
+        Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            Row {
+                AsyncImage(
+                    model = character.image, contentDescription = null
+                )
+                Text(
+                    modifier = Modifier.padding(
+                        start = 8.dp, top = 8.dp
+                    ),
+                    text = character.name,
+                    style = MaterialTheme.typography.body2,
+                )
+            }
+
+            Row {
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        modifier = Modifier.padding(top = 8.dp),
+                        text = character.voiceActor.name,
+                        style = MaterialTheme.typography.body2,
+                    )
+                    Text(
+                        text = character.voiceActor.language, style = MaterialTheme.typography.body2
+                    )
+                }
+                AsyncImage(
+                    modifier = Modifier.padding(start = 8.dp),
+                    model = character.voiceActor.image,
+                    contentDescription = null
+                )
+            }
+        }
+    }
 }
