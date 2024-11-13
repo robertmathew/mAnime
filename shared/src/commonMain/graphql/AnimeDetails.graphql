@@ -1,5 +1,5 @@
 query AnimeDetails(
-    $mediaId: Int, $perPage: Int, $language: StaffLanguage
+    $mediaId: Int, $voicePerPage: Int, $language: StaffLanguage
 ) {
     Media(
         id: $mediaId,
@@ -28,7 +28,7 @@ query AnimeDetails(
             extraLarge
             color
         }
-        characters(perPage: $perPage) {
+        characters(perPage: $voicePerPage) {
             edges {
                 id
                 node {

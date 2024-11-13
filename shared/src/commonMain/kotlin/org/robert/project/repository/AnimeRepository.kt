@@ -11,6 +11,7 @@ import org.robert.project.model.AnimeDetailResponse
 import org.robert.project.model.AnimeListResponse
 import org.robert.project.type.MediaSort
 import org.robert.project.type.MediaType
+import org.robert.project.type.StaffLanguage
 
 interface AnimeRepositoryInterface {
     suspend fun getPopularAnime(): List<AnimeListResponse?>?
@@ -33,7 +34,9 @@ class AnimeRepository(private val mApolloClient: ApolloClient) : AnimeRepository
     override suspend fun getAnimeDetails(animeId: Int): AnimeDetailResponse? {
         return mApolloClient.query(
             AnimeDetailsQuery(
-                mediaId = Optional.present(animeId)
+                mediaId = Optional.present(animeId),
+                voicePerPage = Optional.present(6),
+                language = Optional.present(StaffLanguage.JAPANESE)
             )
         ).execute().data?.Media?.toAnimeDetailResponse()
     }

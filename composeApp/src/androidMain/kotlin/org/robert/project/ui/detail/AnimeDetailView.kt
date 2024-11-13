@@ -1,13 +1,11 @@
 package org.robert.project.ui.detail
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -23,8 +21,10 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -81,7 +81,8 @@ fun AnimeDetailView(
                                 Column(modifier = Modifier.padding(top = 16.dp)) {
                                     Text(
                                         text = "Description",
-                                        style = MaterialTheme.typography.subtitle1
+                                        style = MaterialTheme.typography.subtitle1,
+                                        fontWeight = FontWeight.Bold
                                     )
                                     Text(
                                         text = HtmlCompat.fromHtml(
@@ -92,33 +93,58 @@ fun AnimeDetailView(
                                 }
                             }
                             animeDetails.character?.let {
-                                LazyColumn(
-                                    state = rememberLazyListState(),
+                                Column(
                                     modifier = Modifier.padding(top = 16.dp)
                                 ) {
-                                    item {
-                                        Text(
-                                            text = "Character",
-                                            style = MaterialTheme.typography.subtitle1
-                                        )
-                                    }
 
-                                    items(it) { character ->
+                                    Text(
+                                        text = "Character",
+                                        style = MaterialTheme.typography.subtitle1,
+                                        fontWeight = FontWeight.Bold
+                                    )
+
+                                    it.forEach { character ->
                                         Card(
-                                            modifier = Modifier.height(56.dp),
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(vertical = 8.dp)
+                                                .height(62.dp),
                                             shape = RoundedCornerShape(4.dp)
                                         ) {
-                                            AsyncImage(
-                                                model = character.image,
-                                                contentDescription = null
-                                            )
-                                            Text(text = character.name)
-                                            Spacer(modifier = Modifier.size(48.dp))
-                                            Text(text = character.voiceActor.name)
-                                            AsyncImage(
-                                                model = character.voiceActor.image,
-                                                contentDescription = null
-                                            )
+                                            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                                                Row {
+                                                    AsyncImage(
+                                                        model = character.image,
+                                                        contentDescription = null
+                                                    )
+                                                    Text(
+                                                        modifier = Modifier.padding(
+                                                            start = 8.dp, top = 8.dp
+                                                        ),
+                                                        text = character.name,
+                                                        style = MaterialTheme.typography.body2,
+                                                    )
+                                                }
+
+                                                Row {
+                                                    Column(horizontalAlignment = Alignment.End) {
+                                                        Text(
+                                                            modifier = Modifier.padding(top = 8.dp),
+                                                            text = character.voiceActor.name,
+                                                            style = MaterialTheme.typography.body2,
+                                                        )
+                                                        Text(
+                                                            text = character.voiceActor.language,
+                                                            style = MaterialTheme.typography.body2
+                                                        )
+                                                    }
+                                                    AsyncImage(
+                                                        modifier = Modifier.padding(start = 8.dp),
+                                                        model = character.voiceActor.image,
+                                                        contentDescription = null
+                                                    )
+                                                }
+                                            }
                                         }
                                     }
                                 }
