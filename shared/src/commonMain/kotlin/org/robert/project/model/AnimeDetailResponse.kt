@@ -14,7 +14,8 @@ data class AnimeDetailResponse(
 data class Character(
     val name: String,
     val image: String,
-    val voiceActor: VoiceActor
+    val voiceActor: VoiceActor,
+    val role: String
 )
 
 data class VoiceActor(

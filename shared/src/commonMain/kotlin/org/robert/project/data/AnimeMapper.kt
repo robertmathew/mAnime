@@ -33,7 +33,9 @@ fun AnimeDetailsQuery.Media.toAnimeDetailResponse(): AnimeDetailResponse {
                     image = it?.voiceActors?.get(0)?.image?.large ?: "",
                     language = it?.voiceActors?.get(0)?.languageV2 ?: ""
                 ),
+                role = it?.role?.name ?: ""
             )
-        }
+        },
+
     )
 }

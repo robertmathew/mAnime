@@ -101,11 +101,10 @@ fun AnimeDetailView(
                                 Column(
                                     modifier = Modifier.padding(top = 16.dp)
                                 ) {
-
                                     Text(
                                         text = "Character",
                                         style = MaterialTheme.typography.subtitle1,
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.Bold,
                                     )
 
                                     it.forEach { character ->
@@ -138,30 +137,41 @@ fun CharacterListView(character: Character) {
                 AsyncImage(
                     model = character.image, contentDescription = null
                 )
-                Text(
+                Column(
                     modifier = Modifier.padding(
-                        start = 8.dp, top = 8.dp
-                    ),
-                    text = character.name,
-                    style = MaterialTheme.typography.body2,
-                )
+                        start = 8.dp, top = 8.dp,
+                    )
+                ) {
+                    Text(
+                        text = character.name,
+                        style = MaterialTheme.typography.body2,
+                    )
+                    Text(
+                        modifier = Modifier.padding(top = 4.dp),
+                        text = character.role,
+                        style = MaterialTheme.typography.caption,
+                    )
+                }
             }
 
             Row {
-                Column(horizontalAlignment = Alignment.End) {
+                Column(
+                    modifier = Modifier.padding(top = 8.dp, end = 8.dp),
+                    horizontalAlignment = Alignment.End
+                ) {
                     Text(
-                        modifier = Modifier.padding(top = 8.dp),
                         text = character.voiceActor.name,
                         style = MaterialTheme.typography.body2,
                     )
                     Text(
-                        text = character.voiceActor.language, style = MaterialTheme.typography.body2
+                        modifier = Modifier.padding(top = 4.dp),
+                        text = character.voiceActor.language,
+                        style = MaterialTheme.typography.body2,
                     )
                 }
                 AsyncImage(
-                    modifier = Modifier.padding(start = 8.dp),
                     model = character.voiceActor.image,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
         }

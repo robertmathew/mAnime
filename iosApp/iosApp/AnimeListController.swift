@@ -1,5 +1,5 @@
 //
-//  LIstViewController.swift
+//  AnimeListViewController.swift
 //  iosApp
 //
 //  Created by Robert Mathew [Litmus7] on 15/10/24.
@@ -9,11 +9,11 @@
 import Combine
 import Shared
 
-class ListViewController: ObservableObject {
+class AnimeListController: ObservableObject {
 
     let repo = DiHelper().getAnimeRepository()
 
-    @Published var animeList: [AnimePopularResponse] = []
+    @Published var animeList: [AnimeListResponse] = []
 
     init() {
         getPopularAnimeData()
@@ -27,7 +27,7 @@ class ListViewController: ObservableObject {
 //            return nil
 //        }
         repo.getPopularAnime(completionHandler: { data, error in
-            self.animeList = data as! [AnimePopularResponse]
+            self.animeList = data as! [AnimeListResponse]
         })
     }
 
