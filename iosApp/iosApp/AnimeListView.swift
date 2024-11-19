@@ -19,13 +19,15 @@ struct AnimeListView: View {
                                     image
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                                                                
+                                        .cornerRadius(8)
                                 } placeholder: {
                                     ProgressView()
                                 }
                                 Text(item.title).font(.caption).lineLimit(1)
                             }
-                        }                    }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
             }
             .navigationBarTitle(Text("mAnime"), displayMode: .inline)

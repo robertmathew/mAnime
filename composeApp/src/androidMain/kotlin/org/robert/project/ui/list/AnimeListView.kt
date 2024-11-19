@@ -59,7 +59,7 @@ fun AnimeListViewCompose(
     uiState.popularAnimeList?.let { animeList ->
         LazyVerticalGrid(
             modifier = modifier.padding(8.dp),
-            columns = GridCells.Adaptive(minSize = 96.dp),
+            columns = GridCells.Fixed(3),
             content = {
                 items(animeList) { animeData ->
                     Column(
