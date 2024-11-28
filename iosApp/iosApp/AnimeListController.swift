@@ -20,12 +20,6 @@ class AnimeListController: ObservableObject {
     }
 
     func getPopularAnimeData() {
-//        do {
-//            return try await repo.getPopularAnime()
-//        } catch {
-//            print("Sometimes went wrong")
-//            return nil
-//        }
         repo.getPopularAnime(completionHandler: { data, error in
             self.animeList = data as! [AnimeListResponse]
         })
