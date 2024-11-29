@@ -7,53 +7,126 @@
 //
 
 import SwiftUI
+import Shared
 
 struct AnimeDetailView: View {
     var animeId: Int32
     
     @ObservedObject var controller = AnimeDetailController()
     
-//    var body: some View {
-//        VStack {
-//            AsyncImage(url: URL(string: controller.animeDetail?.bannerImage!)) { image in
-//                image.resizable()
-//            } placeholder: {
-//                ProgressView()
-//            }
-//            
-//            Text(controller.animeDetail?.title ?? "")
-//        }
-//        .onAppear {
-//            controller.getAnimeDetailData(id: animeId)
-//        }
-//    }
     
     var body: some View {
-            VStack {
-                if let bannerImageURL = controller.animeDetail?.bannerImage, let url = URL(string: bannerImageURL) {
-                    AsyncImage(url: url) { image in
-                        image.resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity)
-                    } placeholder: {
+        VStack {
+            if let bannerImageURL = controller.animeDetail?.bannerImage, let url = URL(string: bannerImageURL) {
+                AsyncImage(url: url) { image in
+                    image.resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity)
+                } placeholder: {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                }
+            }
+            
+            Text(controller.animeDetail?.title ?? "Loading...")
+                .font(.headline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+            
+            Text("Description")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.horizontal], 16)
+            
+            Text(controller.animeDetail?.description_ ?? "")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.horizontal], 16)
+                .padding([.top], 8)
+            
+            Text("Character")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.horizontal, .top], 16)
+            
+            if let characters = controller.animeDetail?.character {
+                List(characters, id: \.self) { item in
+                    CharacterListView(character: item)
+                }
+                .listStyle(.plain)
+            } else {
+                // Handle the case when character is nil (e.g., show a placeholder or error message)
+            }
+        }
+        .onAppear {
+            controller.getAnimeDetailData(id: animeId)
+        }
+        
+    }
+}
+
+struct CharacterListView: View {
+    var character: Character
+    
+    var body: some View {
+        
+        HStack {
+            HStack {
+                AsyncImage(url: URL(string: character.image)) { phase in
+                    switch phase {
+                    case .empty:
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
+                    case .success(let image):
+                        image.resizable().scaledToFit()
+                    case .failure:
+                        Image(systemName: "exclamationmark.triangle")
+                    @unknown default:
+                        EmptyView()
                     }
                 }
+                .cornerRadius(4)
                 
-                Text(controller.animeDetail?.title ?? "Loading...")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(character.name)
+                        .font(.body)
+                    Text(character.role)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+            }
+            
+            Spacer()
+            
+            
+            HStack {
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text(character.voiceActor.name)
+                        .font(.body)
+                    Text(character.voiceActor.language)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
                 
-                Spacer()
+                AsyncImage(url: URL(string: character.voiceActor.image)) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image.resizable().scaledToFit()
+                    case .failure:
+                        Image(systemName: "exclamationmark.triangle")
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+                .cornerRadius(4)
             }
-            .onAppear {
-                controller.getAnimeDetailData(id: animeId)
-            }
-        
         }
+        .frame(height: 62)
+    }
 }
+
 
 
 struct AnimeDetailView_Previews: PreviewProvider {

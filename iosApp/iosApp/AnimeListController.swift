@@ -25,5 +25,5 @@ class AnimeListController: ObservableObject {
         })
     }
 
-
+    
 }
