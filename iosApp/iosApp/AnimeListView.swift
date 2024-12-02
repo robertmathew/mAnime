@@ -1,5 +1,6 @@
 import SwiftUI
 import Shared
+import SDWebImageSwiftUI
 
 struct AnimeListView: View {
 
@@ -33,14 +34,11 @@ struct ItemView: View {
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: image)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(8)
-            } placeholder: {
-                ProgressView()
-            }
+            WebImage(url: URL(string: image))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(8)
+            
             Text(title).font(.caption).lineLimit(1)
         }
     }

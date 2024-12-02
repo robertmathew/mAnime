@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Shared
+import SDWebImageSwiftUI
 
 struct AnimeDetailView: View {
     var animeId: Int32
@@ -18,14 +19,10 @@ struct AnimeDetailView: View {
     var body: some View {
         VStack {
             if let bannerImageURL = controller.animeDetail?.bannerImage, let url = URL(string: bannerImageURL) {
-                AsyncImage(url: url) { image in
-                    image.resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: .infinity)
-                } placeholder: {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                }
+                WebImage(url: url)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
             }
             
             Text(controller.animeDetail?.title ?? "Loading...")
@@ -73,19 +70,10 @@ struct CharacterListView: View {
         
         HStack {
             HStack {
-                AsyncImage(url: URL(string: character.image)) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                    case .success(let image):
-                        image.resizable().scaledToFit()
-                    case .failure:
-                        Image(systemName: "exclamationmark.triangle")
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
-                .cornerRadius(4)
+                WebImage(url: URL(string: character.image))
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(4)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(character.name)
@@ -108,19 +96,10 @@ struct CharacterListView: View {
                         .foregroundColor(.gray)
                 }
                 
-                AsyncImage(url: URL(string: character.voiceActor.image)) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                    case .success(let image):
-                        image.resizable().scaledToFit()
-                    case .failure:
-                        Image(systemName: "exclamationmark.triangle")
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
-                .cornerRadius(4)
+                WebImage(url: URL(string: character.voiceActor.image))
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(4)
             }
         }
         .frame(height: 62)
