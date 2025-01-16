@@ -11,7 +11,7 @@ androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.7"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
-apolloRuntime = "4.0.1"
+apolloRuntime = "4.1.0"
 coilCompose = "3.0.2"
 compose-plugin = "1.7.0"
 junit = "4.13.2"
@@ -54,3 +54,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+apollo-plugin = { id = "com.apollographql.apollo", version.ref = "apolloRuntime"}

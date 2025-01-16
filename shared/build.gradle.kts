@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    id("com.apollographql.apollo") version "4.0.1"
+    alias(libs.plugins.apollo.plugin)
 }
 
 kotlin {
