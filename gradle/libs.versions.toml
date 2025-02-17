@@ -11,13 +11,13 @@ androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.7"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
-apolloRuntime = "4.1.0"
+apolloRuntime = "4.1.1"
 coilCompose = "3.0.2"
 compose-plugin = "1.7.0"
 junit = "4.13.2"
 koin = "4.0.0"
 kotlin = "2.1.0"
-navigation-compose = "2.8.5"
+navigation-compose = "2.8.7"
 
 [libraries]
 apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apolloRuntime" }
