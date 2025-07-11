@@ -12,15 +12,16 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,6 +38,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.robert.project.R
 import org.robert.project.model.Character
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
 fun AnimeDetailView(
@@ -79,7 +81,7 @@ fun AnimeDetailView(
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(
                                 modifier = Modifier.padding(top = 8.dp),
-                                style = MaterialTheme.typography.h5,
+                                style = MaterialTheme.typography.headlineMedium,
                                 text = animeDetails.title
                             )
 
@@ -88,7 +90,7 @@ fun AnimeDetailView(
                                 Column(modifier = Modifier.padding(top = 16.dp)) {
                                     Text(
                                         text = "Description",
-                                        style = MaterialTheme.typography.subtitle1,
+                                        style = MaterialTheme.typography.titleSmall,
                                         fontWeight = FontWeight.Bold
                                     )
                                     Text(
@@ -107,7 +109,7 @@ fun AnimeDetailView(
                                 ) {
                                     Text(
                                         text = "Character",
-                                        style = MaterialTheme.typography.subtitle1,
+                                        style = MaterialTheme.typography.titleSmall,
                                         fontWeight = FontWeight.Bold,
                                     )
 
@@ -148,12 +150,12 @@ fun CharacterListView(character: Character) {
                 ) {
                     Text(
                         text = character.name,
-                        style = MaterialTheme.typography.body2,
+                        style = MaterialTheme.typography.bodyMedium,
                     )
                     Text(
                         modifier = Modifier.padding(top = 4.dp),
                         text = character.role,
-                        style = MaterialTheme.typography.caption,
+                        style = MaterialTheme.typography.bodySmall,
                     )
                 }
             }
@@ -165,12 +167,12 @@ fun CharacterListView(character: Character) {
                 ) {
                     Text(
                         text = character.voiceActor.name,
-                        style = MaterialTheme.typography.body2,
+                        style = MaterialTheme.typography.bodyMedium,
                     )
                     Text(
                         modifier = Modifier.padding(top = 4.dp),
                         text = character.voiceActor.language,
-                        style = MaterialTheme.typography.body2,
+                        style = MaterialTheme.typography.bodySmall,
                     )
                 }
                 AsyncImage(
