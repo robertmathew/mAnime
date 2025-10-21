@@ -1,23 +1,24 @@
 [versions]
-agp = "8.7.3"
-android-compileSdk = "35"
+agp = "8.11.2"
+android-compileSdk = "36"
 android-minSdk = "24"
-android-targetSdk = "35"
-androidx-activityCompose = "1.10.1"
+android-targetSdk = "36"
+androidx-activity = "1.11.0"
 androidx-appcompat = "1.7.1"
 androidx-constraintlayout = "2.2.1"
-androidx-core-ktx = "1.16.0"
-androidx-espresso-core = "3.6.1"
-androidx-lifecycle = "2.9.1"
-androidx-test-junit = "1.2.1"
-apolloRuntime = "4.3.1"
-coilCompose = "3.2.0"
-compose-plugin = "1.8.2"
+androidx-core-ktx = "1.17.0"
+androidx-espresso-core = "3.7.0"
+androidx-lifecycle = "2.9.4"
+androidx-test-junit = "1.3.0"
+composeHotReload = "1.0.0-rc02"
+apolloRuntime = "4.3.3"
+coilCompose = "3.3.0"
+compose-plugin = "1.9.1"
 junit = "4.13.2"
-koin = "4.1.0"
-kotlin = "2.2.0"
-material3 = "1.3.2"
-navigation-compose = "2.9.1"
+koin = "4.1.1"
+kotlin = "2.2.20"
+material3 = "1.4.0"
+navigation-compose = "2.9.5"
 
 [libraries]
 apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apolloRuntime" }
@@ -42,7 +43,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 
 androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 androidx-material3-window-size = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "material3" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
@@ -52,6 +53,7 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
